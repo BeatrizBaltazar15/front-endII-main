@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 export default function Afis() {
-        let [nome,setNome] = useState(undefined)
-        let [pacientes,setPacientes] = useState([
-          ])
+    let [nome,setNome] = useState(undefined)
+    let [pacientes,setPacientes] = useState([
+        ])
         const[mostrar, setMostrar] = useState(false);
 
         const [busca,  setBusta] = useState('');
@@ -41,7 +41,7 @@ export default function Afis() {
        
 
         <main className={styles.main}>
-        <div className={styles.pacientes_conteinar}> 
+        <div className={styles.medicos_conteinar}> 
             <h2 className={styles.h2}> Lista de Paciente</h2>
             <button className={styles.buttonMedic}
             onClick={() =>setMostrar(!mostrar)}
