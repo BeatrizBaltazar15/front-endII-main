@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Concert+One&family=Oswald:wght@200..700&family=Spicy+Rice&display=swap');
+
+.img{
+  border-radius: 40px;
+  display: block;
+  margin: auto;
+  padding: 1%;
+}
+
+.home {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: rgb(189, 223, 236);
+}
+.text{
+    font-size: 1.2rem;
+    color: #34495e;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.buttonMedic{
+  display: inline-block;
+  margin: 20px 10px 10px 0;
+  padding: 12px 24px;
+  background-color:rgb(86, 113, 145);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+    
