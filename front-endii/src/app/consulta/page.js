@@ -9,7 +9,7 @@ export default function Afis() {
     const [mostrar, setMostrar] = useState(false);
 
     const [busca, setBusca] = useState('');
-    const nomi = consultas.filter((consultas) => (consultas.nome.toLowerCase().includes(busca.toLowerCase())));
+    const nomi = consultas.filter((consulta) => (consulta.nome.toLowerCase().includes(busca.toLowerCase())));
     const getMedicos = async (nome) => {
         let response = await fetch('https://api-clinica-2a.onrender.com/consultas');
         let data = await response.json();
