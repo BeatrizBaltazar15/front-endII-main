@@ -9,11 +9,11 @@ export default function Afis() {
         const[mostrar, setMostrar] = useState(false);
 
         const [busca,  setBusta] = useState('');
-        const nomesBusca = pacientes.filter((paciente) => (paciente.nome.toLowerCase().includes(busca.toLowerCase)));
-        const getMedicos = async (nome) =>{
+        const nomesBusca = pacientes.filter((paciente) => (paciente.nome.toLowerCase().includes(busca.toLowerCase())));
+        const getMedicos = async (nome) => {
             let response = await fetch('https://api-clinica-2a.onrender.com/pacientes');
             let data = await response.json();
-            console.log(data,nome)
+            console.log(data)
             if (typeof nome == 'undefined') {
                 setPacientes(data);
                 
@@ -60,8 +60,8 @@ export default function Afis() {
 
                 </input>
                 <ul>
-                    {nomesBusca.map((md,i) =>(
-                        <li key={i}>{md.nome}</li>
+                    {nomesBusca.map((md, i) => (
+                        <li className={styles.li} key={i}>{md.nome}</li>
                     ))}
                 </ul>
             </div>
@@ -71,7 +71,7 @@ export default function Afis() {
         
            
             
-            <div className={styles.tabelaContainer}>
+            <div className={styles.tabela_Container}>
                 <table className={styles.tabela_medic}>
                     <thead className={styles.thead}>
                         <tr className={styles.tr}>
@@ -99,7 +99,7 @@ export default function Afis() {
 
          {/*  <Image className={styles.img_sobre} src='/images/onca.webp' alt="gfg" width={450} height={500} />*/}
         </main>
-         
-);
+    );
+
 
 }

@@ -10,7 +10,6 @@ export default function Afis() {
 
     const [busca, setBusca] = useState('');
     const nomesBusca = medicos.filter((medico) => (medico.nome.toLowerCase().includes(busca.toLowerCase())));
-    // const nb = nomes.filter((nome) => (nome.toLowerCase().includes(busca.toLowerCase())));
     const getMedicos = async (nome) => {
         let response = await fetch('https://api-clinica-2a.onrender.com/medicos');
         let data = await response.json();
@@ -56,7 +55,7 @@ export default function Afis() {
                             </input>
                             <ul>
                                 {nomesBusca.map((md, i) => (
-                                    <li key={i}>{md.nome}</li>
+                                    <li className={styles.li} key={i}>{md.nome}</li>
                                 ))}
                             </ul>
                         </div>
@@ -67,7 +66,7 @@ export default function Afis() {
 
 
 
-                <div className={styles.tabelaContainer}>
+                <div className={styles.tabela_Container}>
                     <table className={styles.tabela_medic}>
                         <thead className={styles.thead}>
                             <tr className={styles.tr}>
