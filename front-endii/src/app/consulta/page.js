@@ -4,14 +4,14 @@ import styles from "./page.module.css";
 import Image from "next/image";
 export default function Afis() {
     let [nome, setNome] = useState(undefined)
+
     let [consultas, setConsultas] = useState([])
-    let [pacientes, setPacientes] = useState([])
+  
     const [mostrar, setMostrar] = useState(false);
 
     const [busca, setBusca] = useState('');
     const nomi = consultas.filter((consulta) => (consulta.medico.toLowerCase().includes(busca.toLowerCase())));
-    const nomes = consultas.filter((consulta) => (consulta.paciente.toLowerCase().includes(busca.toLowerCase())));
-
+    const noms = consultas.filter((consulta) => (consulta.paciente.toLowerCase().includes(busca.toLowerCase())));
     const getConsultas = async (nome) => {
         let response = await fetch('https://api-clinica-2a.onrender.com/consultas');
         let data = await response.json();
@@ -41,9 +41,6 @@ export default function Afis() {
                 <button className={styles.buttonMedic}
                 onClick={() => setMostrar(!mostrar)}
                 >Buscar por Médicos</button>
-                <button className={styles.buttonMedic}
-                onClick={() => setMostrar(!mostrar)}
-                >Buscar por Pacientes</button>
                 {mostrar &&
                     <div className={styles.botao} onClick={() => setMostrar(!mostrar)}>
                         <div className={styles.selecione} onClick={(e) => e.stopPropagation()}>
@@ -54,33 +51,41 @@ export default function Afis() {
                                 onChange={(e) => setBusca(e.target.value)}
                                 value={busca}
                                 onClick={() => setMostrar(mostrar)}
-                                >
+                                > 
                             </input>
-                            <div className={styles.medicos_conteinar}>
-                            <div className={styles.selecione} onClick={(e) => e.stopPropagation()}>
-                            <h3>Selecione um paciente</h3>
+                            <ul>
+                                {nomi.map((md, i) => (
+                                    <li className={styles.li} key={i}>{md.medico}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                }
+                
+
+
+                <button className={styles.buttonMedic}
+                onClick={() => setMostrar(!mostrar)}
+                >Buscar por Paciente</button>
+                {mostrar &&
+                    <div className={styles.botao} onClick={() => setMostrar(!mostrar)}>
+                        <div className={styles.selecione} onClick={(e) => e.stopPropagation()}>
+                            <h3>Selecione um Paciente</h3>
                             <input
                                 placeholder="Digite o nome do paciente"
                                 type="text"
                                 onChange={(e) => setBusca(e.target.value)}
                                 value={busca}
                                 onClick={() => setMostrar(mostrar)}
-                                >  
-
+                                > 
                             </input>
-                        </div>
                             <ul>
-                                {nomi.map((md, i) => (
-                                    <li className={styles.li} key={i}>{md.medico}</li>
-                                ))}
-                                 {nomes.map((md, i) => (
+                                {noms.map((md, i) => (
                                     <li className={styles.li} key={i}>{md.paciente}</li>
                                 ))}
                             </ul>
                         </div>
-
                     </div>
-                </div>
                 }
 
 
@@ -112,7 +117,6 @@ export default function Afis() {
                 </div>
             </div>
 
-            {/*  <Image className={styles.img_sobre} src='/images/onca.webp' alt="gfg" width={450} height={500} />*/}
         </main>
 
     );
