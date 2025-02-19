@@ -4,13 +4,15 @@ import styles from "./page.module.css";
 import Image from "next/image";
 export default function Afis() {
     let [nome, setNome] = useState(undefined)
-    let [consultas, setConsultas] = useState([
-    ])
+    let [consultas, setConsultas] = useState([])
+    let [pacientes, setPacientes] = useState([])
     const [mostrar, setMostrar] = useState(false);
 
     const [busca, setBusca] = useState('');
-    const nomi = consultas.filter((consulta) => (consulta.nome.toLowerCase().includes(busca.toLowerCase())));
-    const getMedicos = async (nome) => {
+    const nomi = consultas.filter((consulta) => (consulta.medico.toLowerCase().includes(busca.toLowerCase())));
+    const nomes = consultas.filter((consulta) => (consulta.paciente.toLowerCase().includes(busca.toLowerCase())));
+
+    const getConsultas = async (nome) => {
         let response = await fetch('https://api-clinica-2a.onrender.com/consultas');
         let data = await response.json();
         console.log(data)
@@ -28,7 +30,7 @@ export default function Afis() {
     }
 
     useEffect(() => {
-        getMedicos(nome);
+        getConsultas(nome);
     }, [nome]);
     return (
 
@@ -39,6 +41,9 @@ export default function Afis() {
                 <button className={styles.buttonMedic}
                 onClick={() => setMostrar(!mostrar)}
                 >Buscar por Médicos</button>
+                <button className={styles.buttonMedic}
+                onClick={() => setMostrar(!mostrar)}
+                >Buscar por Pacientes</button>
                 {mostrar &&
                     <div className={styles.botao} onClick={() => setMostrar(!mostrar)}>
                         <div className={styles.selecione} onClick={(e) => e.stopPropagation()}>
@@ -50,17 +55,32 @@ export default function Afis() {
                                 value={busca}
                                 onClick={() => setMostrar(mostrar)}
                                 >
-                                    
+                            </input>
+                            <div className={styles.medicos_conteinar}>
+                            <div className={styles.selecione} onClick={(e) => e.stopPropagation()}>
+                            <h3>Selecione um paciente</h3>
+                            <input
+                                placeholder="Digite o nome do paciente"
+                                type="text"
+                                onChange={(e) => setBusca(e.target.value)}
+                                value={busca}
+                                onClick={() => setMostrar(mostrar)}
+                                >  
 
                             </input>
+                        </div>
                             <ul>
                                 {nomi.map((md, i) => (
-                                    <li className={styles.li} key={i}>{md.nome}</li>
+                                    <li className={styles.li} key={i}>{md.medico}</li>
+                                ))}
+                                 {nomes.map((md, i) => (
+                                    <li className={styles.li} key={i}>{md.paciente}</li>
                                 ))}
                             </ul>
                         </div>
 
                     </div>
+                </div>
                 }
 
 
@@ -81,10 +101,10 @@ export default function Afis() {
                             {consultas.map((consultas) => (
                                 <tr className={styles.tro} key={consultas.id}>
                                     <td className={styles.td}>{consultas.id}</td>
-                                    <td className={styles.td}>{consultas.nome}</td>
-                                    <td className={styles.td}>{consultas.telefone}</td>
-                                    <td className={styles.td}>{consultas.email}</td>
+                                    <td className={styles.td}>{consultas.medico}</td>
                                     <td className={styles.td}>{consultas.especialidade}</td>
+                                    <td className={styles.td}>{consultas.paciente}</td>
+                                    <td className={styles.td}>{consultas.tipo}</td>
                                 </tr>
                             ))}
                         </tbody>
